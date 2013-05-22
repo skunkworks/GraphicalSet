@@ -59,7 +59,7 @@
 }
 
 // Accepts array of Card, returns array of UIView
-- (NSArray *)createCardSubviews:(NSArray *)cards
++ (NSArray *)createCardSubviews:(NSArray *)cards
 {
     NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
     

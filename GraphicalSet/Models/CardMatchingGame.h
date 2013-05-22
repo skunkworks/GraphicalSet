@@ -25,6 +25,7 @@
 // Returns card that have been played, nil if no more cards could be played from the deck
 - (Card *)drawCardFromDeck;
 
+// Returns YES if there are still cards in the deck to play
 - (BOOL)hasDrawableCards;
 
 @property (readonly, nonatomic) int score;
@@ -35,5 +36,4 @@
 @property (nonatomic) CGFloat matchBonusMultiplier;
 @property (nonatomic) int mismatchPenalty;
 @property (nonatomic) int flipCost;
-
 @end

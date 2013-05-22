@@ -69,7 +69,11 @@
     return nil; // abstract method
 }
 
-- (NSArray *)createCardSubviews:(NSArray *)cards {
+- (void)removeMatchedCardsFromGame:(CardMatchingGame *)game {
+    // abstract
+}
+
++ (NSArray *)createCardSubviews:(NSArray *)cards {
     // abstract
     return nil;
 }
@@ -89,10 +93,15 @@
     CGPoint tapPoint = [sender locationInView:self.cardCollectionView];
     NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapPoint];
     
-    // If the gesture was made on a cell in our collection view
+    // If the gesture was made on a cell in the collection view
     if (indexPath) {
+        // Flip a card
         [self.game flipCardAtIndex:indexPath.item];
-        [self.flipResultView displayResultString:self.game.result withCardSubviews:[self createCardSubviews:[self.game cardsFromResult]]];
+        // Display the result in the flip result view
+        [self.flipResultView displayResultString:self.game.result withCardSubviews:[[self class] createCardSubviews:[self.game cardsFromResult]]];
+        for (int i = 0; i < [self.cardCollectionView numberOfItemsInSection:0]; i++) {
+            
+        }
         [self updateUI];
     }
 }
