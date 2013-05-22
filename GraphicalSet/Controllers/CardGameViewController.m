@@ -103,7 +103,6 @@
         // Remove matched (i.e. unplayable) cards. Must use NSMutableIndexSet and the array of IndexPaths to track cards to remove, since removing cells and cards must be an atomic operation (removing one-by-one would affect array indexing)
         NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
         NSMutableIndexSet *mutableIndexSet = [[NSMutableIndexSet alloc] init];
-        NSLog(@"***BEFORE*** Cells: %d  Cards: %d", [self.cardCollectionView numberOfItemsInSection:0], self.game.cardsInPlayCount);
         for (int i = 0; i < [self.cardCollectionView numberOfItemsInSection:0]; i++) {
             if ([[self.game cardAtIndex:i] isUnplayable]) {
                 [mutableArray addObject:[NSIndexPath indexPathForItem:i inSection:0]];
@@ -114,7 +113,6 @@
         [self.cardCollectionView deleteItemsAtIndexPaths:[mutableArray copy]];
         
         if ([mutableArray count] == 2) NSLog(@"Deleting index paths: %@, %@", [mutableArray objectAtIndex:0], [mutableArray objectAtIndex:1]);
-        NSLog(@"***AFTER*** Cells: %d  Cards: %d", [self.cardCollectionView numberOfItemsInSection:0], self.game.cardsInPlayCount);
         [self updateUI];
     }
 }
