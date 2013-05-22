@@ -145,7 +145,10 @@
         BOOL firstRun = true;
         for (Card *card in cards) {
             if ([card isKindOfClass:[Card class]]) {
-                if (firstRun) [mutableString appendString:[NSString stringWithFormat:@"[%@]", card.contents]];
+                if (firstRun) {
+                    [mutableString appendString:[NSString stringWithFormat:@"[%@]", card.contents]];
+                    firstRun = false;
+                }
                 else          [mutableString appendString:[NSString stringWithFormat:@"&[%@]", card.contents]];
             }
         }
@@ -169,6 +172,11 @@
 
 - (BOOL)hasDrawableCards {
     return [self.deck hasDrawableCards];
+}
+
+- (void)removeCardsAtIndexPaths:(NSIndexSet *)indexes
+{
+    [self.cards removeObjectsAtIndexes:indexes];
 }
 
 @end

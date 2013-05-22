@@ -99,9 +99,22 @@
         [self.game flipCardAtIndex:indexPath.item];
         // Display the result in the flip result view
         [self.flipResultView displayResultString:self.game.result withCardSubviews:[[self class] createCardSubviews:[self.game cardsFromResult]]];
+        
+        // Remove matched (i.e. unplayable) cards. Must use NSMutableIndexSet and the array of IndexPaths to track cards to remove, since removing cells and cards must be an atomic operation (removing one-by-one would affect array indexing)
+        NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
+        NSMutableIndexSet *mutableIndexSet = [[NSMutableIndexSet alloc] init];
+        NSLog(@"***BEFORE*** Cells: %d  Cards: %d", [self.cardCollectionView numberOfItemsInSection:0], self.game.cardsInPlayCount);
         for (int i = 0; i < [self.cardCollectionView numberOfItemsInSection:0]; i++) {
-            
+            if ([[self.game cardAtIndex:i] isUnplayable]) {
+                [mutableArray addObject:[NSIndexPath indexPathForItem:i inSection:0]];
+                [mutableIndexSet addIndex:i];
+            }
         }
+        [self.game removeCardsAtIndexPaths:[mutableIndexSet copy]];
+        [self.cardCollectionView deleteItemsAtIndexPaths:[mutableArray copy]];
+        
+        if ([mutableArray count] == 2) NSLog(@"Deleting index paths: %@, %@", [mutableArray objectAtIndex:0], [mutableArray objectAtIndex:1]);
+        NSLog(@"***AFTER*** Cells: %d  Cards: %d", [self.cardCollectionView numberOfItemsInSection:0], self.game.cardsInPlayCount);
         [self updateUI];
     }
 }
@@ -111,6 +124,7 @@
     self.deck = nil;
     self.addCardsButton.enabled = YES;
     self.addCardsButton.alpha = 1;
+    [self.flipResultView displayResultString:@""];
     // This will force a resync to the model data, which will remove the extra cells from adding cards during gameplay
     [self.cardCollectionView reloadData];
     [self updateUI];

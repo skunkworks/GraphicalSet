@@ -71,7 +71,7 @@
     }
 }
 
-#define MARGIN_SCALE .10
+#define MARGIN_SCALE .05
 
 // Returns NSArray of NSValue-wrapped CGRects where the symbols should be drawn
 - (NSArray *)rectsForSymbolsOnCardWithRect:(CGRect)rect
