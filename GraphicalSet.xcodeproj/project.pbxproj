@@ -61,7 +61,6 @@
 		4A4AD2FA17489E9900763EAD /* SetCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AD2F917489E9900763EAD /* SetCardCollectionViewCell.m */; };
 		4A4AD2FD17489EA900763EAD /* SetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AD2FC17489EA900763EAD /* SetCardView.m */; };
 		4A4AD303174B4C1700763EAD /* FlipResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AD302174B4C1700763EAD /* FlipResultView.m */; };
-		4A4AD306174BE19700763EAD /* RegExTesterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AD305174BE19700763EAD /* RegExTesterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,8 +138,6 @@
 		4A4AD2FC17489EA900763EAD /* SetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCardView.m; sourceTree = "<group>"; };
 		4A4AD301174B4C1700763EAD /* FlipResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlipResultView.h; sourceTree = "<group>"; };
 		4A4AD302174B4C1700763EAD /* FlipResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlipResultView.m; sourceTree = "<group>"; };
-		4A4AD304174BE19700763EAD /* RegExTesterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExTesterViewController.h; sourceTree = "<group>"; };
-		4A4AD305174BE19700763EAD /* RegExTesterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegExTesterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,8 +219,6 @@
 				4A2C096A17484E6400C249FD /* PlayingCardGameViewController.m */,
 				4A2C096B17484E6400C249FD /* SetGameViewController.h */,
 				4A2C096C17484E6400C249FD /* SetGameViewController.m */,
-				4A4AD304174BE19700763EAD /* RegExTesterViewController.h */,
-				4A4AD305174BE19700763EAD /* RegExTesterViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -424,7 +419,6 @@
 				4A4AD2FA17489E9900763EAD /* SetCardCollectionViewCell.m in Sources */,
 				4A4AD2FD17489EA900763EAD /* SetCardView.m in Sources */,
 				4A4AD303174B4C1700763EAD /* FlipResultView.m in Sources */,
-				4A4AD306174BE19700763EAD /* RegExTesterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
