@@ -98,7 +98,9 @@
         // Flip a card
         [self.game flipCardAtIndex:indexPath.item];
         // Display the result in the flip result view
-        [self.flipResultView displayResultString:self.game.result withCardSubviews:[[self class] createCardSubviews:[self.game cardsFromResult]]];
+        [self.flipResultView displayResultString:self.game.result
+                                withCardSubviews:[[self class] createCardSubviews:[self.game cardsFromResult]]
+                                    displayRatio:self.cardSubviewDisplayRatio];
         
         // Remove matched (i.e. unplayable) cards. Must use NSMutableIndexSet and the array of IndexPaths to track cards to remove, since removing cells and cards must be an atomic operation (removing one-by-one would affect array indexing)
         NSMutableArray *mutableArray = [[NSMutableArray alloc] init];

@@ -18,6 +18,7 @@
 @property (nonatomic) CGFloat matchBonusMultiplier; // abstract
 @property (nonatomic) int mismatchPenalty; // abstract
 @property (nonatomic) int flipCost; // abstract
+@property (nonatomic) CGFloat cardSubviewDisplayRatio; // abstract
 
 - (Deck *)createDeck; // abstract
 - (void)updateCell:(UICollectionViewCell *)cell

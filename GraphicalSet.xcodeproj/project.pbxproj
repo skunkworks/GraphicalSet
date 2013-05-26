@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A26CA411752ADA0004EDF2F /* GameSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A26CA401752ADA0004EDF2F /* GameSettings.m */; };
 		4A2C094417484DBE00C249FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2C094317484DBE00C249FD /* UIKit.framework */; };
 		4A2C094617484DBE00C249FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2C094517484DBE00C249FD /* Foundation.framework */; };
 		4A2C094817484DBE00C249FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2C094717484DBE00C249FD /* CoreGraphics.framework */; };
@@ -64,6 +65,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A26CA3F1752ADA0004EDF2F /* GameSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSettings.h; sourceTree = "<group>"; };
+		4A26CA401752ADA0004EDF2F /* GameSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSettings.m; sourceTree = "<group>"; };
 		4A2C094017484DBE00C249FD /* GraphicalSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphicalSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2C094317484DBE00C249FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4A2C094517484DBE00C249FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -285,6 +288,8 @@
 				4A2C099917484E6400C249FD /* SetCard.m */,
 				4A2C099A17484E6400C249FD /* SetCardDeck.h */,
 				4A2C099B17484E6400C249FD /* SetCardDeck.m */,
+				4A26CA3F1752ADA0004EDF2F /* GameSettings.h */,
+				4A26CA401752ADA0004EDF2F /* GameSettings.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 				4A4AD2FA17489E9900763EAD /* SetCardCollectionViewCell.m in Sources */,
 				4A4AD2FD17489EA900763EAD /* SetCardView.m in Sources */,
 				4A4AD303174B4C1700763EAD /* FlipResultView.m in Sources */,
+				4A26CA411752ADA0004EDF2F /* GameSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

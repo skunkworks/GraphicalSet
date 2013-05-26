@@ -40,6 +40,9 @@
 - (CGFloat)matchBonusMultiplier {
     return 3;
 }
+- (CGFloat)cardSubviewDisplayRatio {
+    return 1;
+}
 
 - (void)updateCell:(UICollectionViewCell *)cell
           withCard:(Card *)card

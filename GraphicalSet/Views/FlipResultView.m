@@ -15,6 +15,13 @@
 
 @implementation FlipResultView
 
+- (CGFloat) cardSubviewDisplayRatio {
+    if (_cardSubviewDisplayRatio <= 0) {
+        _cardSubviewDisplayRatio = 1;
+    }
+    return _cardSubviewDisplayRatio;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -33,9 +40,11 @@
 
 - (void)displayResultString:(NSString *)result
            withCardSubviews:(NSArray *)cardSubviews
+               displayRatio:(CGFloat)displayRatio
 {
     self.result = result;
     self.cardSubviews = cardSubviews;
+    self.cardSubviewDisplayRatio = displayRatio;
     [self setNeedsDisplay];
 }
 
@@ -69,7 +78,7 @@
                 UIView *subview = (UIView *)self.cardSubviews[subviewIndex];
                 CGRect viewBounds;
                 viewBounds.origin = CGPointMake(xCoordinate, 0);
-                viewBounds.size = CGSizeMake(self.bounds.size.height, self.bounds.size.height);
+                viewBounds.size = CGSizeMake(self.bounds.size.height*self.cardSubviewDisplayRatio, self.bounds.size.height);
                 subview.frame = viewBounds;
                 subview.backgroundColor = [UIColor clearColor];
                 [self addSubview:subview];

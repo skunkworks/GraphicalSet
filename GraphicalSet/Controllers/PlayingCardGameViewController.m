@@ -33,6 +33,9 @@
 - (int)flipCost {
     return 1;
 }
+- (CGFloat)cardSubviewDisplayRatio {
+    return .8;
+}
 
 // Overrides abstract method in superclass
 - (Deck *)createDeck {

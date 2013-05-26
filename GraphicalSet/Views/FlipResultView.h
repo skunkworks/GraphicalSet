@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 @interface FlipResultView : UIView
+@property (nonatomic) CGFloat cardSubviewDisplayRatio;
 - (void)displayResultString:(NSString *)result;
 - (void)displayResultString:(NSString *)result
-           withCardSubviews:(NSArray *)cardSubviews;
+           withCardSubviews:(NSArray *)cardSubviews
+               displayRatio:(CGFloat)displayRatio;
 @end
