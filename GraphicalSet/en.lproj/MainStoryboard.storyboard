@@ -129,7 +129,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-62" y="188"/>
+            <point key="canvasLocation" x="-120" y="-470"/>
         </scene>
         <!--Playing Card Game View Controller - Playing Card-->
         <scene sceneID="8oN-RQ-Jmb">
@@ -234,7 +234,48 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-62" y="-465"/>
+            <point key="canvasLocation" x="-480" y="-477"/>
+        </scene>
+        <!--Game Settings View Controller - Item-->
+        <scene sceneID="9PY-R5-8sG">
+            <objects>
+                <viewController id="oQx-R1-QQs" customClass="GameSettingsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cMe-53-fMC">
+                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Playing Card Start Count: 12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhH-au-qpo">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="12" minValue="12" maxValue="52" translatesAutoresizingMaskIntoConstraints="NO" id="aCk-Iz-SCd">
+                                <connections>
+                                    <action selector="changePlayingCardStartCount:" destination="oQx-R1-QQs" eventType="valueChanged" id="kbD-w9-vkF"/>
+                                    <action selector="editedPlayingCardStartCount:" destination="oQx-R1-QQs" eventType="touchUpInside" id="Mpj-G5-N2T"/>
+                                    <action selector="editedPlayingCardStartCount:" destination="oQx-R1-QQs" eventType="touchUpOutside" id="aUl-ip-RPm"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aCk-Iz-SCd" firstAttribute="top" secondItem="YhH-au-qpo" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Ahu-6i-hdR"/>
+                            <constraint firstItem="aCk-Iz-SCd" firstAttribute="leading" secondItem="cMe-53-fMC" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="EKl-ed-aBW"/>
+                            <constraint firstAttribute="trailing" secondItem="YhH-au-qpo" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="HoG-he-vgf"/>
+                            <constraint firstAttribute="trailing" secondItem="aCk-Iz-SCd" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="aHm-aK-oOz"/>
+                            <constraint firstItem="YhH-au-qpo" firstAttribute="top" secondItem="cMe-53-fMC" secondAttribute="top" constant="20" symbolic="YES" type="default" id="ckn-Bw-nEF"/>
+                            <constraint firstItem="YhH-au-qpo" firstAttribute="leading" secondItem="cMe-53-fMC" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="wJ3-OC-L74"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Sxv-wr-Uma"/>
+                    <connections>
+                        <outlet property="playingCardStartCountLabel" destination="YhH-au-qpo" id="rEN-gA-Tif"/>
+                        <outlet property="playingCardStartCountSlider" destination="aCk-Iz-SCd" id="YqQ-6r-Gha"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ouw-TL-cbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-480" y="168"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="QNE-u9-jOn">
@@ -249,70 +290,18 @@
                     <connections>
                         <segue destination="8B6-Zb-OfT" kind="relationship" relationship="viewControllers" id="0RZ-Uz-xbE"/>
                         <segue destination="xZ7-Dr-hvI" kind="relationship" relationship="viewControllers" id="5Zu-pN-2n4"/>
+                        <segue destination="oQx-R1-QQs" kind="relationship" relationship="viewControllers" id="fHQ-de-AEn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PlE-gU-z2g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-596" y="-138"/>
+            <point key="canvasLocation" x="-969" y="-477"/>
         </scene>
     </scenes>
     <resources>
         <image name="spade.png" width="30" height="30"/>
         <image name="square.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="CardGameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CardGameViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addCardsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="cardCollectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="flipResultView" candidateClass="FlipResultView"/>
-                <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="FlipResultView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlipResultView.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PlayingCardCollectionViewCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardCollectionViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="playingCardView" candidateClass="PlayingCardView"/>
-            </relationships>
-        </class>
-        <class className="PlayingCardGameViewController" superclassName="CardGameViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardGameViewController.h"/>
-        </class>
-        <class className="PlayingCardView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardView.h"/>
-        </class>
-        <class className="SetCardCollectionViewCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetCardCollectionViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="setCardView" candidateClass="SetCardView"/>
-            </relationships>
-        </class>
-        <class className="SetCardView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetCardView.h"/>
-        </class>
-        <class className="SetGameViewController" superclassName="CardGameViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetGameViewController.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

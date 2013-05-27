@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface GameSettings : NSObject
+
 @property (nonatomic) NSUInteger playingCardStartCount;
+
++ (GameSettings *)settings;
 
 @end

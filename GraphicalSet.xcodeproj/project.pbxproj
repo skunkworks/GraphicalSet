@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A26CA411752ADA0004EDF2F /* GameSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A26CA401752ADA0004EDF2F /* GameSettings.m */; };
+		4A26CA441752B489004EDF2F /* GameSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A26CA431752B489004EDF2F /* GameSettingsViewController.m */; };
 		4A2C094417484DBE00C249FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2C094317484DBE00C249FD /* UIKit.framework */; };
 		4A2C094617484DBE00C249FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2C094517484DBE00C249FD /* Foundation.framework */; };
 		4A2C094817484DBE00C249FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2C094717484DBE00C249FD /* CoreGraphics.framework */; };
@@ -67,6 +68,8 @@
 /* Begin PBXFileReference section */
 		4A26CA3F1752ADA0004EDF2F /* GameSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSettings.h; sourceTree = "<group>"; };
 		4A26CA401752ADA0004EDF2F /* GameSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSettings.m; sourceTree = "<group>"; };
+		4A26CA421752B489004EDF2F /* GameSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSettingsViewController.h; sourceTree = "<group>"; };
+		4A26CA431752B489004EDF2F /* GameSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSettingsViewController.m; sourceTree = "<group>"; };
 		4A2C094017484DBE00C249FD /* GraphicalSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphicalSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2C094317484DBE00C249FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4A2C094517484DBE00C249FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -222,6 +225,8 @@
 				4A2C096A17484E6400C249FD /* PlayingCardGameViewController.m */,
 				4A2C096B17484E6400C249FD /* SetGameViewController.h */,
 				4A2C096C17484E6400C249FD /* SetGameViewController.m */,
+				4A26CA421752B489004EDF2F /* GameSettingsViewController.h */,
+				4A26CA431752B489004EDF2F /* GameSettingsViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -425,6 +430,7 @@
 				4A4AD2FD17489EA900763EAD /* SetCardView.m in Sources */,
 				4A4AD303174B4C1700763EAD /* FlipResultView.m in Sources */,
 				4A26CA411752ADA0004EDF2F /* GameSettings.m in Sources */,
+				4A26CA441752B489004EDF2F /* GameSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

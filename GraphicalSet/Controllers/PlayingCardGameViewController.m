@@ -19,7 +19,7 @@
     return @"PlayingCard";
 }
 - (NSUInteger)startingCardCount {
-    return 22;
+    return [GameSettings settings].playingCardStartCount;
 }
 - (NSUInteger)numberOfCardsToMatch {
     return 2;
