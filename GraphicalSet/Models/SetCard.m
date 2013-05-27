@@ -39,20 +39,22 @@
 
 - (int)match:(NSArray *)otherCards
 {
-    NSIndexSet *indexSet = [otherCards indexesOfObjectsPassingTest:
-     ^BOOL(id obj, NSUInteger idx, BOOL *stop) { return ((SetCard *)obj).symbol == self.symbol; }];
-    if ([indexSet count] > 0 && [indexSet count] < [otherCards count]) return 0;
-    indexSet = [otherCards indexesOfObjectsPassingTest:
-                 ^BOOL(id obj, NSUInteger idx, BOOL *stop) { return ((SetCard *)obj).shade == self.shade; }];
-    if ([indexSet count] > 0 && [indexSet count] < [otherCards count]) return 0;
-    indexSet = [otherCards indexesOfObjectsPassingTest:
-                ^BOOL(id obj, NSUInteger idx, BOOL *stop) { return ((SetCard *)obj).color == self.color; }];
-    if ([indexSet count] > 0 && [indexSet count] < [otherCards count]) return 0;
-    indexSet = [otherCards indexesOfObjectsPassingTest:
-                ^BOOL(id obj, NSUInteger idx, BOOL *stop) { return ((SetCard *)obj).number == self.number; }];
-    if ([indexSet count] > 0 && [indexSet count] < [otherCards count]) return 0;
-
-    return 1;
+    NSArray *allCards = [otherCards arrayByAddingObject:self];
+    int allCardsCount = [allCards count];
+    
+    // Test for similarity or for mutual exclusion
+    NSSet *setOfSymbols = [[NSMutableSet alloc] initWithArray:[allCards valueForKey:@"symbol"]];
+    NSSet *setOfNumbers = [[NSMutableSet alloc] initWithArray:[allCards valueForKey:@"number"]];
+    NSSet *setOfShades = [[NSMutableSet alloc] initWithArray:[allCards valueForKey:@"shade"]];
+    NSSet *setOfColors = [[NSMutableSet alloc] initWithArray:[allCards valueForKey:@"color"]];
+    
+    if (([setOfSymbols count] == 1 || [setOfSymbols count] == allCardsCount) &&
+        ([setOfNumbers count] == 1 || [setOfNumbers count] == allCardsCount) &&
+        ([setOfShades count] == 1 || [setOfShades count] == allCardsCount) &&
+        ([setOfColors count] == 1 || [setOfColors count] == allCardsCount)) {
+        return 1;
+    }
+    return 0;
 }
 
 + (NSArray *)validSymbols {
