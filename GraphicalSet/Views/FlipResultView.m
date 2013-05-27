@@ -49,7 +49,7 @@
 }
 
 
-#define FONT_SCALE_FACTOR 0.60
+#define FONT_SCALE_FACTOR 0.55
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -48,14 +48,14 @@
     [backgroundColor setFill];
     UIRectFill(self.bounds);
     
-    UIColor *strokeColor = [self colorForCardSymbolWithAlpha:1];
+    UIColor *strokeColor = [self colorForCard];
     
     UIColor *fillColor = nil;
     // solid color fill
     if (self.shade == 1) {
         fillColor = strokeColor;
     } else if (self.shade == 2) {
-        fillColor = [self colorForCardSymbolWithAlpha:.3];
+        fillColor = [self stripedFillColorForCard];
     }
 
     for (NSValue *rectValue in [self rectsForSymbolsOnCardWithRect:rect]) {
@@ -71,7 +71,7 @@
     }
 }
 
-#define MARGIN_SCALE .05
+#define MARGIN_SCALE .07
 
 // Returns NSArray of NSValue-wrapped CGRects where the symbols should be drawn
 - (NSArray *)rectsForSymbolsOnCardWithRect:(CGRect)rect
@@ -100,15 +100,30 @@
 }
 
 // Returns the UIColor for this card's symbols
-- (UIColor *)colorForCardSymbolWithAlpha:(CGFloat)alpha {
+- (UIColor *)colorForCard {
     UIColor *color = nil;
 
     if (self.color == 1) {
-        color = [[UIColor alloc] initWithRed:1 green:0 blue:0 alpha:alpha];
+        color = [[UIColor alloc] initWithRed:1 green:0 blue:0 alpha:1];
     } else if (self.color == 2) {
-        color = [[UIColor alloc] initWithRed:0 green:1 blue:0 alpha:alpha];
+        color = [[UIColor alloc] initWithRed:0 green:1 blue:0 alpha:1];
     } else if (self.color == 3) {
-        color = [[UIColor alloc] initWithRed:.5 green:0 blue:.5 alpha:alpha];
+        color = [[UIColor alloc] initWithRed:.5 green:0 blue:.5 alpha:1];
+    }
+    
+    return color;
+}
+
+// Returns striped UIColor pattern for striped shading
+- (UIColor *)stripedFillColorForCard {
+    UIColor *color = nil;
+    
+    if (self.color == 1) {
+        color = [UIColor colorWithPatternImage:[UIImage imageNamed:@"red_stripes.gif"]];
+    } else if (self.color == 2) {
+        color = [UIColor colorWithPatternImage:[UIImage imageNamed:@"green_stripes.gif"]];
+    } else if (self.color == 3) {
+        color = [UIColor colorWithPatternImage:[UIImage imageNamed:@"purple_stripes.gif"]];
     }
     
     return color;
@@ -117,6 +132,7 @@
 #define KERNING_SCALE .2
 #define SQUIGGLE_CONTROL_POINT_PULL_SCALE .5
 #define DIAMOND_SIDE_INSET_SCALE .2
+#define OVAL_SIDE_INSET_SCALE .2
 
 // Returns the symbol drawn as a UIBezierPath within the bounds of a CGRect
 + (UIBezierPath *)bezierPathForSymbol:(NSUInteger)symbol inRect:(CGRect)rect {
@@ -150,7 +166,7 @@
         [bezierPath addCurveToPoint:topLeft controlPoint1:controlPoint3 controlPoint2:controlPoint4];
     } else if (symbol == 3) {
         // Draw oval
-        bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(rect.origin.x, rect.origin.y + kerningHeight, rect.size.width, rect.size.height - (kerningHeight * 2))];
+        bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(rect.origin.x + (rect.size.width*OVAL_SIDE_INSET_SCALE), rect.origin.y + kerningHeight, rect.size.width - (2*rect.size.width*OVAL_SIDE_INSET_SCALE), rect.size.height - (kerningHeight * 2))];
     }
     
     return bezierPath;
