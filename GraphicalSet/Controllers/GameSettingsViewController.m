@@ -23,14 +23,14 @@
 // Updates label when user moves slider
 - (IBAction)changePlayingCardStartCount:(UISlider *)sender
 {
-    int count = floor(sender.value);
+    int count = round(sender.value);
     [self updatePlayingCardStartCountLabelWithCount:count];
 }
 
 // Updates the actual game setting when user is done moving slider. We separate this into its own target-action method because we don't want to constantly update the game settings value when we scrub the slider, which would cause a synchronization with the user defaults each time. Instead, we choose to synchronize only when the user does a touch up (either inside or outside the UIControl)
 - (IBAction)editedPlayingCardStartCount:(UISlider *)sender
 {
-    int count = floor(sender.value);
+    int count = round(sender.value);
     [GameSettings settings].playingCardStartCount = count;
 }
 

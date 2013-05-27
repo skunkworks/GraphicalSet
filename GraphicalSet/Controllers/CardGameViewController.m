@@ -125,7 +125,7 @@
     self.addCardsButton.enabled = YES;
     self.addCardsButton.alpha = 1;
     [self.flipResultView displayResultString:@""];
-    // This will force a resync to the model data, which will remove the extra cells from adding cards during gameplay
+    // This will force a resync to the model data and is needed to force the cardCollectionView to reload the correct number of cells, since they may have been added/deleted during the previous game
     [self.cardCollectionView reloadData];
     [self updateUI];
 }
