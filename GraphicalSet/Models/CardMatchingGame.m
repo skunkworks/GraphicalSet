@@ -176,7 +176,7 @@
     return [self.deck hasDrawableCards];
 }
 
-- (void)removeCardsAtIndexPaths:(NSIndexSet *)indexes
+- (void)removeCardsAtIndexes:(NSIndexSet *)indexes
 {
     [self.cards removeObjectsAtIndexes:indexes];
 }

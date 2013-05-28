@@ -28,7 +28,7 @@
 // Returns YES if there are still cards in the deck to play
 - (BOOL)hasDrawableCards;
 
-- (void)removeCardsAtIndexPaths:(NSArray *)indexPaths;
+- (void)removeCardsAtIndexes:(NSIndexSet *)indexes;
 
 @property (readonly, nonatomic) int score;
 @property (readonly, nonatomic) NSString *result;

@@ -119,7 +119,7 @@
                 [mutableIndexSet addIndex:i];
             }
         }
-        [self.game removeCardsAtIndexPaths:[mutableIndexSet copy]];
+        [self.game removeCardsAtIndexes:[mutableIndexSet copy]];
         [self.cardCollectionView deleteItemsAtIndexPaths:[mutableArray copy]];
         
         if ([mutableArray count] == 2) NSLog(@"Deleting index paths: %@, %@", [mutableArray objectAtIndex:0], [mutableArray objectAtIndex:1]);
