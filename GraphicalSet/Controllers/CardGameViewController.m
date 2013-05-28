@@ -101,6 +101,11 @@
         [self.flipResultView displayResultString:self.game.result
                                 withCardSubviews:[[self class] createCardSubviews:[self.game cardsFromResult]]
                                     displayRatio:self.cardSubviewDisplayRatio];
+        self.flipResultView.alpha = 1;
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:5];
+        self.flipResultView.alpha = 0;
+        [UIView commitAnimations];
         
         // Remove matched (i.e. unplayable) cards. Must use NSMutableIndexSet and the array of IndexPaths to track cards to remove, since removing cells and cards must be an atomic operation (removing one-by-one would affect array indexing)
         NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
