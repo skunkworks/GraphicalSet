@@ -123,7 +123,7 @@
                     self.result = [NSString stringWithFormat:@"Matched %@ (+%d)", [CardMatchingGame formatCardsAsString:matchedCards], matchScore];
                 } else {
                     for (Card *matchedCard in matchedCards) matchedCard.faceUp = NO;
-                    matchScore = self.mismatchPenalty * [otherCards count];
+                    matchScore = self.mismatchPenalty;
                     self.score -= matchScore;
                     self.result = [NSString stringWithFormat:@"%@ don’t match! (-%d)", [CardMatchingGame formatCardsAsString:matchedCards], matchScore];
                 }

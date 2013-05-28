@@ -38,7 +38,7 @@
     return 2;
 }
 - (CGFloat)matchBonusMultiplier {
-    return 3;
+    return 4;
 }
 - (CGFloat)cardSubviewDisplayRatio {
     return 1;
