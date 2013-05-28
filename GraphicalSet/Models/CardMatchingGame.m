@@ -131,6 +131,8 @@
             self.score -= self.flipCost;
             self.gameResult.score = self.score;
             [self.gameResult synchronize];
+        } else {
+            self.result = nil;
         }
         card.faceUp = !card.faceUp;
     }

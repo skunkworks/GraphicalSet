@@ -236,7 +236,7 @@
             </objects>
             <point key="canvasLocation" x="-480" y="-477"/>
         </scene>
-        <!--Game Settings View Controller - Item-->
+        <!--Game Settings View Controller - Game Settings-->
         <scene sceneID="9PY-R5-8sG">
             <objects>
                 <viewController id="oQx-R1-QQs" customClass="GameSettingsViewController" sceneMemberID="viewController">
@@ -267,7 +267,7 @@
                             <constraint firstItem="YhH-au-qpo" firstAttribute="leading" secondItem="cMe-53-fMC" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="wJ3-OC-L74"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Sxv-wr-Uma"/>
+                    <tabBarItem key="tabBarItem" title="Game Settings" id="Sxv-wr-Uma"/>
                     <connections>
                         <outlet property="playingCardStartCountLabel" destination="YhH-au-qpo" id="rEN-gA-Tif"/>
                         <outlet property="playingCardStartCountSlider" destination="aCk-Iz-SCd" id="YqQ-6r-Gha"/>
@@ -320,6 +320,7 @@
         <class className="GameSettingsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSettingsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="changePlayingCardStartCount:" candidateClass="UISlider"/>
                 <relationship kind="action" name="editedPlayingCardStartCount:" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="playingCardStartCountLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="playingCardStartCountSlider" candidateClass="UISlider"/>
