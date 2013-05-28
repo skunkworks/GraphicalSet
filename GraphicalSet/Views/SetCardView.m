@@ -40,12 +40,12 @@
     return self;
 }
 
+#define SELECTED_MARK_SCALE .3
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    UIColor *backgroundColor = (self.isFaceUp) ? [UIColor colorWithRed:0 green:0 blue:1 alpha:.3] : [UIColor whiteColor];
-    [backgroundColor setFill];
+    [[UIColor whiteColor] setFill];
     UIRectFill(self.bounds);
     
     UIColor *strokeColor = [self colorForCard];
@@ -69,9 +69,17 @@
         [bezierPath fill];
         [bezierPath stroke];
     }
+    
+    if (self.isFaceUp) {
+        CGSize selectedMarkSize = CGSizeMake(rect.size.width * SELECTED_MARK_SCALE, rect.size.width * SELECTED_MARK_SCALE);
+        CGRect selectedMarkRect = CGRectMake(rect.size.width + rect.origin.x - selectedMarkSize.width, 0,
+                                             selectedMarkSize.width, selectedMarkSize.height);
+        NSAttributedString *checkMark = [[NSAttributedString alloc] initWithString:@"✓" attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:selectedMarkSize.width]}];
+        [checkMark drawInRect:selectedMarkRect];
+    }
 }
 
-#define MARGIN_SCALE .07
+#define MARGIN_SCALE .1
 
 // Returns NSArray of NSValue-wrapped CGRects where the symbols should be drawn
 - (NSArray *)rectsForSymbolsOnCardWithRect:(CGRect)rect
