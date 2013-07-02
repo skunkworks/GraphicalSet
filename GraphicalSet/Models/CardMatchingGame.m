@@ -14,6 +14,7 @@
 @property (readwrite, nonatomic) NSString *result;
 @property (readwrite, nonatomic) NSArray *cardsFromResult; // of Card
 @property (strong, nonatomic) NSMutableArray *cards; // of Card
+@property (strong, nonatomic) NSMutableArray *matches; // contains NSArray of Card
 @property (strong, nonatomic) GameResult *gameResult;
 @property (strong, nonatomic) Deck *deck;
 @end
@@ -24,6 +25,11 @@
 {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
+}
+
+- (NSMutableArray *)matches {
+    if (!_matches) _matches = [[NSMutableArray alloc] init];
+    return _matches;
 }
 
 - (NSArray *)cardsFromResult {
@@ -69,6 +75,9 @@
 }
 - (NSUInteger)cardsInPlayCount {
     return [self.cards count];
+}
+- (NSUInteger)matchesCount {
+    return [self.matches count];
 }
 
 - (id)initWithCardCount:(NSUInteger)count
@@ -121,6 +130,7 @@
                     matchScore = matchScore * self.matchBonusMultiplier * [otherCards count];
                     self.score += matchScore;
                     self.result = [NSString stringWithFormat:@"Matched %@ (+%d)", [CardMatchingGame formatCardsAsString:matchedCards], matchScore];
+                    [self.matches addObject:[matchedCards copy]];
                 } else {
                     for (Card *matchedCard in matchedCards) matchedCard.faceUp = NO;
                     matchScore = self.mismatchPenalty;
@@ -138,6 +148,7 @@
     }
 }
 
+// Helper method to take one or more cards and return them as a human-readable string
 + (NSString *)formatCardsAsString:(NSArray *)cards
 {
     NSMutableString *mutableString = nil;
@@ -162,6 +173,10 @@
 - (Card *)cardAtIndex:(NSUInteger)index
 {
     return (index < [self.cards count]) ? self.cards[index] : nil;
+}
+
+- (NSArray *)matchAtIndex:(NSUInteger)index {
+    return (index < [self.matches count]) ? self.matches[index] : nil;
 }
 
 // Returns card that has been played, nil if no more cards could be played from the deck

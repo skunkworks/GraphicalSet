@@ -24,5 +24,7 @@
 - (Deck *)createDeck; // abstract
 - (void)updateCell:(UICollectionViewCell *)cell
           withCard:(Card *)card; // abstract
+- (void)updateCell:(UICollectionViewCell *)cell
+          withMatchedCards:(NSArray *)cards; // abstract
 + (NSArray *)createCardSubviews:(NSArray *)cards; // abstract, accepts array of Card, returns array of UIView
 @end

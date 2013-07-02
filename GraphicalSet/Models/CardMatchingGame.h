@@ -22,6 +22,8 @@
 
 - (NSUInteger)cardsInPlayCount;
 
+- (NSUInteger)matchesCount;
+
 // Returns card that have been played, nil if no more cards could be played from the deck
 - (Card *)drawCardFromDeck;
 
@@ -29,6 +31,9 @@
 - (BOOL)hasDrawableCards;
 
 - (void)removeCardsAtIndexes:(NSIndexSet *)indexes;
+
+// Returns NSArray of Card for a valid match index
+- (NSArray *)matchAtIndex:(NSUInteger)index;
 
 @property (readonly, nonatomic) int score;
 @property (readonly, nonatomic) NSString *result;

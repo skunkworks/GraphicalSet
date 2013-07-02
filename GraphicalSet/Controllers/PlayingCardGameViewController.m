@@ -9,6 +9,7 @@
 #import "PlayingCardGameViewController.h"
 #import "PlayingCardDeck.h"
 #import "PlayingCardCollectionViewCell.h"
+#import "PlayingCardMatchCollectionViewCell.h"
 
 @interface PlayingCardGameViewController ()
 @end
@@ -25,7 +26,7 @@
     return 2;
 }
 -(CGFloat)matchBonusMultiplier {
-    return 2;
+    return 3;
 }
 - (int)mismatchPenalty {
     return 2;
@@ -57,6 +58,34 @@
             playingCardView.suit = playingCard.suit;
             playingCardView.faceUp = playingCard.isFaceUp;
             playingCardView.alpha = playingCard.isUnplayable ? .3 : 1;
+        }
+    }
+}
+
+- (void)updateCell:(UICollectionViewCell *)cell withMatchedCards:(NSArray *)cards {
+    if ([cards count] == 2) {
+        PlayingCardMatchCollectionViewCell *pcmcvc = (PlayingCardMatchCollectionViewCell *)cell;
+        
+        if (pcmcvc) {
+            /*
+            PlayingCardView *playingCardView1 = pcmcvc.playingCardViews[0];
+            PlayingCardView *playingCardView2 = pcmcvc.playingCardViews[1];
+            playingCardView1.backgroundColor = [UIColor clearColor];
+            playingCardView2.backgroundColor = [UIColor clearColor];
+            PlayingCard *playingCard1 = (PlayingCard *)cards[0];
+            PlayingCard *playingCard2 = (PlayingCard *)cards[1];
+            
+            if (playingCard1 && playingCard2) {
+                playingCardView1.rank = playingCard1.rank;
+                playingCardView1.suit = playingCard1.suit;
+                playingCardView1.faceUp = YES;
+                playingCardView2.rank = playingCard2.rank;
+                playingCardView2.suit = playingCard2.suit;
+                playingCardView2.faceUp = YES;
+            } */
+            PlayingCard *playingCard1 = (PlayingCard *)cards[0];
+            PlayingCard *playingCard2 = (PlayingCard *)cards[1];
+            pcmcvc.matchString = [NSString stringWithFormat:@"%d%@ and %d%@", playingCard1.rank, playingCard1.suit, playingCard2.rank, playingCard2.suit];
         }
     }
 }

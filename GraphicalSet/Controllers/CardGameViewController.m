@@ -46,15 +46,32 @@
 
 #pragma UICollectionViewDataSource protocol methods
 
+#define CARD_SECTION_INDEX 0
+#define MATCH_SECTION_INDEX 1
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 2;
+}
+
 - (int)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.game.cardsInPlayCount;
+    if (section == CARD_SECTION_INDEX) return [self.game cardsInPlayCount];
+    else if (section == MATCH_SECTION_INDEX) return [self.game matchesCount];
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.identifier forIndexPath:indexPath];
-    Card *card = [self.game cardAtIndex:indexPath.item];
-    [self updateCell:cell withCard:card];
+    UICollectionViewCell *cell = nil;
+    if (indexPath.section == CARD_SECTION_INDEX) {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.identifier forIndexPath:indexPath];
+        Card *card = [self.game cardAtIndex:indexPath.item];
+        [self updateCell:cell withCard:card];
+    } else if (indexPath.section == MATCH_SECTION_INDEX) {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self.identifier stringByAppendingString:@"Match"] forIndexPath:indexPath];
+        // NSLog(@"Cell bounds = %@", NSStringFromCGRect(cell.bounds));
+        NSArray *matchedCards = [self.game matchAtIndex:indexPath.item];
+        [self updateCell:cell withMatchedCards:matchedCards];
+    }
     return cell;
 }
 
@@ -62,6 +79,10 @@
 
 - (void)updateCell:(UICollectionViewCell *)cell withCard:(Card *)card
 {
+    // abstract method
+}
+
+- (void)updateCell:(UICollectionViewCell *)cell withMatchedCards:(NSArray *)cards {
     // abstract method
 }
 
@@ -82,8 +103,13 @@
 {
     for (UICollectionViewCell *cell in [self.cardCollectionView visibleCells]) {
         NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
-        Card *card = [self.game cardAtIndex:indexPath.item];
-        [self updateCell:cell withCard:card];
+        if (indexPath.section == CARD_SECTION_INDEX) {
+            Card *card = [self.game cardAtIndex:indexPath.item];
+            [self updateCell:cell withCard:card];
+        } else if (indexPath.section == MATCH_SECTION_INDEX) {
+            NSArray *matchedCards = [self.game matchAtIndex:indexPath.item];
+            [self updateCell:cell withMatchedCards:matchedCards];
+        }
     }
     
     [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %d", self.game.score]];
@@ -94,7 +120,7 @@
     NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapPoint];
     
     // If the gesture was made on a cell in the collection view
-    if (indexPath) {
+    if (indexPath && indexPath.section == CARD_SECTION_INDEX) {
         // Flip a card
         [self.game flipCardAtIndex:indexPath.item];
         
@@ -115,14 +141,18 @@
         NSMutableIndexSet *mutableIndexSet = [[NSMutableIndexSet alloc] init];
         for (int i = 0; i < [self.cardCollectionView numberOfItemsInSection:0]; i++) {
             if ([[self.game cardAtIndex:i] isUnplayable]) {
-                [mutableArray addObject:[NSIndexPath indexPathForItem:i inSection:0]];
+                [mutableArray addObject:[NSIndexPath indexPathForItem:i inSection:CARD_SECTION_INDEX]];
                 [mutableIndexSet addIndex:i];
             }
         }
-        [self.game removeCardsAtIndexes:[mutableIndexSet copy]];
-        [self.cardCollectionView deleteItemsAtIndexPaths:[mutableArray copy]];
-        
-        if ([mutableArray count] == 2) NSLog(@"Deleting index paths: %@, %@", [mutableArray objectAtIndex:0], [mutableArray objectAtIndex:1]);
+        if ([mutableIndexSet count]) {
+            // Update matched section of our collection view
+            [self.cardCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.game matchesCount]-1 inSection:MATCH_SECTION_INDEX]]];
+            // Finally, remove the cards from the game and from the collection view. This has to be done after we insert the matched cards into the match section of the collection view, otherwise there's a discrepancy between what the data source returns for the card count vs. the cell count in the collection view.
+            [self.game removeCardsAtIndexes:[mutableIndexSet copy]];
+            [self.cardCollectionView deleteItemsAtIndexPaths:[mutableArray copy]];
+        }
+
         [self updateUI];
     }
 }
@@ -143,7 +173,7 @@
     for (int i = 0; i < self.numberOfCardsToAdd; i++) {
         Card *card = [self.game drawCardFromDeck];
         if (card) {
-            [self.cardCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1 inSection:0]]];
+            [self.cardCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1 inSection:CARD_SECTION_INDEX]]];
         }
     }
     
@@ -152,10 +182,9 @@
         self.addCardsButton.alpha = .3;
     }
     
-    [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1 inSection:0]
+    [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1 inSection:CARD_SECTION_INDEX]
                                     atScrollPosition:UICollectionViewScrollPositionBottom
                                             animated:YES];
 }
-
 
 @end

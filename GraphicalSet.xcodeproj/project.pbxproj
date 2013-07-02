@@ -12,6 +12,8 @@
 		4A26CA5617542878004EDF2F /* green_stripes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4A26CA5317542878004EDF2F /* green_stripes.gif */; };
 		4A26CA5717542878004EDF2F /* purple_stripes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4A26CA5417542878004EDF2F /* purple_stripes.gif */; };
 		4A26CA5817542878004EDF2F /* red_stripes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4A26CA5517542878004EDF2F /* red_stripes.gif */; };
+		4A26CA5B175449DB004EDF2F /* PlayingCardMatchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A26CA5A175449DB004EDF2F /* PlayingCardMatchCollectionViewCell.m */; };
+		4A26CA5E175449F6004EDF2F /* SetCardMatchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A26CA5D175449F6004EDF2F /* SetCardMatchCollectionViewCell.m */; };
 		4A2C094417484DBE00C249FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2C094317484DBE00C249FD /* UIKit.framework */; };
 		4A2C094617484DBE00C249FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2C094517484DBE00C249FD /* Foundation.framework */; };
 		4A2C094817484DBE00C249FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2C094717484DBE00C249FD /* CoreGraphics.framework */; };
@@ -76,6 +78,10 @@
 		4A26CA5317542878004EDF2F /* green_stripes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = green_stripes.gif; sourceTree = "<group>"; };
 		4A26CA5417542878004EDF2F /* purple_stripes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = purple_stripes.gif; sourceTree = "<group>"; };
 		4A26CA5517542878004EDF2F /* red_stripes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = red_stripes.gif; sourceTree = "<group>"; };
+		4A26CA59175449DB004EDF2F /* PlayingCardMatchCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardMatchCollectionViewCell.h; sourceTree = "<group>"; };
+		4A26CA5A175449DB004EDF2F /* PlayingCardMatchCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardMatchCollectionViewCell.m; sourceTree = "<group>"; };
+		4A26CA5C175449F6004EDF2F /* SetCardMatchCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCardMatchCollectionViewCell.h; sourceTree = "<group>"; };
+		4A26CA5D175449F6004EDF2F /* SetCardMatchCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCardMatchCollectionViewCell.m; sourceTree = "<group>"; };
 		4A2C094017484DBE00C249FD /* GraphicalSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphicalSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2C094317484DBE00C249FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4A2C094517484DBE00C249FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -321,6 +327,10 @@
 				4A4AD2FC17489EA900763EAD /* SetCardView.m */,
 				4A4AD301174B4C1700763EAD /* FlipResultView.h */,
 				4A4AD302174B4C1700763EAD /* FlipResultView.m */,
+				4A26CA59175449DB004EDF2F /* PlayingCardMatchCollectionViewCell.h */,
+				4A26CA5A175449DB004EDF2F /* PlayingCardMatchCollectionViewCell.m */,
+				4A26CA5C175449F6004EDF2F /* SetCardMatchCollectionViewCell.h */,
+				4A26CA5D175449F6004EDF2F /* SetCardMatchCollectionViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -443,6 +453,8 @@
 				4A4AD303174B4C1700763EAD /* FlipResultView.m in Sources */,
 				4A26CA411752ADA0004EDF2F /* GameSettings.m in Sources */,
 				4A26CA441752B489004EDF2F /* GameSettingsViewController.m in Sources */,
+				4A26CA5B175449DB004EDF2F /* PlayingCardMatchCollectionViewCell.m in Sources */,
+				4A26CA5E175449F6004EDF2F /* SetCardMatchCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
