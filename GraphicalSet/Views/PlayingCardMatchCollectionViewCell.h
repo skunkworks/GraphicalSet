@@ -11,5 +11,4 @@
 
 @interface PlayingCardMatchCollectionViewCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutletCollection(PlayingCardView) NSArray *playingCardViews;
-@property (strong, nonatomic) NSString *matchString;
 @end

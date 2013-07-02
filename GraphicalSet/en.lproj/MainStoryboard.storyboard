@@ -173,13 +173,36 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayingCardMatch" id="5Gf-zQ-GD1" customClass="PlayingCardMatchCollectionViewCell">
-                                        <rect key="frame" x="85" y="0.0" width="64" height="76"/>
+                                        <rect key="frame" x="74" y="0.0" width="128" height="76"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="64" height="76"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgw-Ia-Fxq" customClass="PlayingCardView">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqa-gO-7kD" customClass="PlayingCardView">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Zgw-Ia-Fxq" secondAttribute="trailing" constant="64" id="2Ix-fr-0OK"/>
+                                            <constraint firstItem="Zgw-Ia-Fxq" firstAttribute="top" secondItem="5Gf-zQ-GD1" secondAttribute="top" type="default" id="37L-Jh-Qfb"/>
+                                            <constraint firstItem="aqa-gO-7kD" firstAttribute="trailing" secondItem="5Gf-zQ-GD1" secondAttribute="trailing" type="default" id="GjC-bG-l6j"/>
+                                            <constraint firstItem="aqa-gO-7kD" firstAttribute="bottom" secondItem="5Gf-zQ-GD1" secondAttribute="bottom" type="default" id="N4L-gd-qMy"/>
+                                            <constraint firstItem="Zgw-Ia-Fxq" firstAttribute="leading" secondItem="5Gf-zQ-GD1" secondAttribute="leading" type="default" id="Yfu-QT-7ww"/>
+                                            <constraint firstItem="aqa-gO-7kD" firstAttribute="leading" secondItem="5Gf-zQ-GD1" secondAttribute="leading" constant="64" id="a7d-uV-7IL"/>
+                                            <constraint firstItem="aqa-gO-7kD" firstAttribute="top" secondItem="5Gf-zQ-GD1" secondAttribute="top" type="default" id="eXh-eF-8WL"/>
+                                            <constraint firstItem="Zgw-Ia-Fxq" firstAttribute="bottom" secondItem="5Gf-zQ-GD1" secondAttribute="bottom" type="default" id="qVw-O1-H9R"/>
+                                        </constraints>
+                                        <size key="customSize" width="128" height="76"/>
+                                        <connections>
+                                            <outletCollection property="playingCardViews" destination="aqa-gO-7kD" id="dJg-d4-2X6"/>
+                                            <outletCollection property="playingCardViews" destination="Zgw-Ia-Fxq" id="W82-0i-Ev8"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>

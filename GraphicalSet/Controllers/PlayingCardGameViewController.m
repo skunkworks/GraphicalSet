@@ -67,7 +67,6 @@
         PlayingCardMatchCollectionViewCell *pcmcvc = (PlayingCardMatchCollectionViewCell *)cell;
         
         if (pcmcvc) {
-            /*
             PlayingCardView *playingCardView1 = pcmcvc.playingCardViews[0];
             PlayingCardView *playingCardView2 = pcmcvc.playingCardViews[1];
             playingCardView1.backgroundColor = [UIColor clearColor];
@@ -82,10 +81,7 @@
                 playingCardView2.rank = playingCard2.rank;
                 playingCardView2.suit = playingCard2.suit;
                 playingCardView2.faceUp = YES;
-            } */
-            PlayingCard *playingCard1 = (PlayingCard *)cards[0];
-            PlayingCard *playingCard2 = (PlayingCard *)cards[1];
-            pcmcvc.matchString = [NSString stringWithFormat:@"%@ and %@", playingCard1, playingCard2];
+            }
         }
     }
 }

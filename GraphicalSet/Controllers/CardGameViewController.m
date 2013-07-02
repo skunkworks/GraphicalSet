@@ -88,18 +88,18 @@
             return cardCellSize;
             break;
         case MATCH_SECTION_INDEX:
-            return CGSizeMake(cardCellSize.width * 2 + MATCH_CELL_PADDING * 2, cardCellSize.height + MATCH_CELL_PADDING * 2);
+            return CGSizeMake(cardCellSize.width * 2, cardCellSize.height);
             break;
     }
     return CGSizeMake(0, 0);
 }
-
+/*
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout*)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(50, 20, 50, 20);
-}
+}*/
 
 
 
