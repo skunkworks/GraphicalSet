@@ -215,10 +215,4 @@
                                             animated:YES];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.cardCollectionView.delegate = self;
-}
-
 @end

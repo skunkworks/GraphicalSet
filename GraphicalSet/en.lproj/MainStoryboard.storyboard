@@ -207,6 +207,7 @@
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="8B6-Zb-OfT" id="63e-8h-3w8"/>
+                                    <outlet property="delegate" destination="8B6-Zb-OfT" id="jbo-GS-l6k"/>
                                     <outletCollection property="gestureRecognizers" destination="cfe-In-egn" appends="YES" id="Q6E-rn-48W"/>
                                 </connections>
                             </collectionView>
@@ -352,8 +353,6 @@
         <class className="GameSettingsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSettingsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="changePlayingCardStartCount:" candidateClass="UISlider"/>
-                <relationship kind="action" name="editedPlayingCardStartCount:" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="playingCardStartCountLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="playingCardStartCountSlider" candidateClass="UISlider"/>
             </relationships>
