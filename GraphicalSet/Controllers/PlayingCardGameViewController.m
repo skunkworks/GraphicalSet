@@ -85,7 +85,7 @@
             } */
             PlayingCard *playingCard1 = (PlayingCard *)cards[0];
             PlayingCard *playingCard2 = (PlayingCard *)cards[1];
-            pcmcvc.matchString = [NSString stringWithFormat:@"%d%@ and %d%@", playingCard1.rank, playingCard1.suit, playingCard2.rank, playingCard2.suit];
+            pcmcvc.matchString = [NSString stringWithFormat:@"%@ and %@", playingCard1, playingCard2];
         }
     }
 }

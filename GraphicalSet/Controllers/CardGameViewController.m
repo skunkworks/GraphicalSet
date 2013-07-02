@@ -10,7 +10,7 @@
 #import "CardMatchingGame.h"
 #import "FlipResultView.h"
 
-@interface CardGameViewController () <UICollectionViewDataSource>
+@interface CardGameViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addCardsButton;
@@ -68,12 +68,40 @@
         [self updateCell:cell withCard:card];
     } else if (indexPath.section == MATCH_SECTION_INDEX) {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self.identifier stringByAppendingString:@"Match"] forIndexPath:indexPath];
-        // NSLog(@"Cell bounds = %@", NSStringFromCGRect(cell.bounds));
         NSArray *matchedCards = [self.game matchAtIndex:indexPath.item];
         [self updateCell:cell withMatchedCards:matchedCards];
     }
     return cell;
 }
+
+#pragma UICollectionViewDelegateFlowLayout protocol methods
+
+#define MATCH_CELL_PADDING 5
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize cardCellSize = ((UICollectionViewFlowLayout *)collectionViewLayout).itemSize;
+    switch ([indexPath indexAtPosition:0]) {
+        case CARD_SECTION_INDEX:
+            return cardCellSize;
+            break;
+        case MATCH_SECTION_INDEX:
+            return CGSizeMake(cardCellSize.width * 2 + MATCH_CELL_PADDING * 2, cardCellSize.height + MATCH_CELL_PADDING * 2);
+            break;
+    }
+    return CGSizeMake(0, 0);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout*)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(50, 20, 50, 20);
+}
+
+
 
 #pragma Abstract methods
 
@@ -185,6 +213,12 @@
     [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1 inSection:CARD_SECTION_INDEX]
                                     atScrollPosition:UICollectionViewScrollPositionBottom
                                             animated:YES];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.cardCollectionView.delegate = self;
 }
 
 @end

@@ -25,11 +25,8 @@
 - (void)drawRect:(CGRect)rect
 {
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:self.matchString attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12] }];
-    CGRect textBounds;
-    textBounds.origin = CGPointMake(0, 0);
-    textBounds.size = [string size];
-    [string drawInRect:textBounds];
-
+    [string drawInRect:self.bounds];
+    NSLog(@"self.bounds: %f, %f", self.bounds.size.width, self.bounds.size.height);
 }
 
 

@@ -97,6 +97,7 @@
                 break;
             }
         }
+        self.matches = nil;
     }
     
     return self;

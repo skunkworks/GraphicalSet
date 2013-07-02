@@ -173,14 +173,13 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayingCardMatch" id="5Gf-zQ-GD1" customClass="PlayingCardMatchCollectionViewCell">
-                                        <rect key="frame" x="74" y="0.0" width="128" height="76"/>
+                                        <rect key="frame" x="85" y="0.0" width="64" height="76"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="76"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="64" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <size key="customSize" width="128" height="76"/>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
