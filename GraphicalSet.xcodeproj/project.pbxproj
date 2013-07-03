@@ -68,6 +68,7 @@
 		4A4AD2FA17489E9900763EAD /* SetCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AD2F917489E9900763EAD /* SetCardCollectionViewCell.m */; };
 		4A4AD2FD17489EA900763EAD /* SetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AD2FC17489EA900763EAD /* SetCardView.m */; };
 		4A4AD303174B4C1700763EAD /* FlipResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AD302174B4C1700763EAD /* FlipResultView.m */; };
+		4A4B0DCD1783A37600B9EF5C /* MatchSectionHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4B0DCC1783A37500B9EF5C /* MatchSectionHeaderReusableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +157,8 @@
 		4A4AD2FC17489EA900763EAD /* SetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCardView.m; sourceTree = "<group>"; };
 		4A4AD301174B4C1700763EAD /* FlipResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlipResultView.h; sourceTree = "<group>"; };
 		4A4AD302174B4C1700763EAD /* FlipResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlipResultView.m; sourceTree = "<group>"; };
+		4A4B0DCB1783A37500B9EF5C /* MatchSectionHeaderReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchSectionHeaderReusableView.h; sourceTree = "<group>"; };
+		4A4B0DCC1783A37500B9EF5C /* MatchSectionHeaderReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchSectionHeaderReusableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +334,8 @@
 				4A26CA5A175449DB004EDF2F /* PlayingCardMatchCollectionViewCell.m */,
 				4A26CA5C175449F6004EDF2F /* SetCardMatchCollectionViewCell.h */,
 				4A26CA5D175449F6004EDF2F /* SetCardMatchCollectionViewCell.m */,
+				4A4B0DCB1783A37500B9EF5C /* MatchSectionHeaderReusableView.h */,
+				4A4B0DCC1783A37500B9EF5C /* MatchSectionHeaderReusableView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 				4A26CA441752B489004EDF2F /* GameSettingsViewController.m in Sources */,
 				4A26CA5B175449DB004EDF2F /* PlayingCardMatchCollectionViewCell.m in Sources */,
 				4A26CA5E175449F6004EDF2F /* SetCardMatchCollectionViewCell.m in Sources */,
+				4A4B0DCD1783A37600B9EF5C /* MatchSectionHeaderReusableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "CardGameViewController.h"
 #import "CardMatchingGame.h"
 #import "FlipResultView.h"
+#import "MatchSectionHeaderReusableView.h"
 
 @interface CardGameViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
@@ -74,6 +75,31 @@
     return cell;
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *supplementaryView = nil;
+    
+    if (indexPath.section == MATCH_SECTION_INDEX) {
+        supplementaryView = [self.cardCollectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                        withReuseIdentifier:@"HeaderView"
+                                                                               forIndexPath:indexPath];
+    }
+
+    return supplementaryView;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView
+                 layout:(UICollectionViewLayout *)collectionViewLayout
+referenceSizeForHeaderInSection:(NSInteger)section
+{
+    if (section == CARD_SECTION_INDEX) return CGSizeMake(0, 0);
+    else {
+        return CGSizeMake(self.view.frame.size.width, 50);
+    }
+}
+
 #pragma UICollectionViewDelegateFlowLayout protocol methods
 
 #define MATCH_CELL_PADDING 5
@@ -93,15 +119,6 @@
     }
     return CGSizeMake(0, 0);
 }
-/*
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
-                        layout:(UICollectionViewLayout*)collectionViewLayout
-        insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(50, 20, 50, 20);
-}*/
-
-
 
 #pragma Abstract methods
 
@@ -213,6 +230,13 @@
     [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1 inSection:CARD_SECTION_INDEX]
                                     atScrollPosition:UICollectionViewScrollPositionBottom
                                             animated:YES];
+}
+
+- (void)viewDidLoad
+{
+    [self.cardCollectionView registerClass:[MatchSectionHeaderReusableView class]
+                forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                       withReuseIdentifier:@"HeaderView"];
 }
 
 @end

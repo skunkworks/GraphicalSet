@@ -144,13 +144,13 @@
                                 <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Off-tS-qmt">
                                     <size key="itemSize" width="64" height="76"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayingCard" id="M7D-Oq-PrG" customClass="PlayingCardCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="76"/>
+                                        <rect key="frame" x="0.0" y="50" width="64" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="64" height="76"/>
@@ -173,7 +173,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayingCardMatch" id="5Gf-zQ-GD1" customClass="PlayingCardMatchCollectionViewCell">
-                                        <rect key="frame" x="74" y="0.0" width="128" height="76"/>
+                                        <rect key="frame" x="74" y="50" width="128" height="76"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="76"/>
@@ -205,6 +205,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderView" id="Zpu-Il-VLW" customClass="MatchSectionHeaderReusableView">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="8B6-Zb-OfT" id="63e-8h-3w8"/>
                                     <outlet property="delegate" destination="8B6-Zb-OfT" id="jbo-GS-l6k"/>
@@ -335,74 +339,6 @@
         <image name="spade.png" width="30" height="30"/>
         <image name="square.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="CardGameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CardGameViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addCards:"/>
-                <relationship kind="action" name="flipCard:" candidateClass="UITapGestureRecognizer"/>
-                <relationship kind="outlet" name="addCardsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="cardCollectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="flipResultView" candidateClass="FlipResultView"/>
-                <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="FlipResultView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlipResultView.h"/>
-        </class>
-        <class className="GameSettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="playingCardStartCountLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="playingCardStartCountSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PlayingCardCollectionViewCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardCollectionViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="playingCardView" candidateClass="PlayingCardView"/>
-            </relationships>
-        </class>
-        <class className="PlayingCardGameViewController" superclassName="CardGameViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardGameViewController.h"/>
-        </class>
-        <class className="PlayingCardMatchCollectionViewCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardMatchCollectionViewCell.h"/>
-            <relationships>
-                <relationship kind="outletCollection" name="playingCardViews" candidateClass="PlayingCardView"/>
-            </relationships>
-        </class>
-        <class className="PlayingCardView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayingCardView.h"/>
-        </class>
-        <class className="SetCardCollectionViewCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetCardCollectionViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="setCardView" candidateClass="SetCardView"/>
-            </relationships>
-        </class>
-        <class className="SetCardView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetCardView.h"/>
-        </class>
-        <class className="SetGameViewController" superclassName="CardGameViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetGameViewController.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
