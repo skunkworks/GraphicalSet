@@ -9,7 +9,7 @@
 #import "PlayingCardGameViewController.h"
 #import "PlayingCardDeck.h"
 #import "PlayingCardCollectionViewCell.h"
-#import "PlayingCardMatchCollectionViewCell.h"
+#import "MatchCollectionViewCell.h"
 
 @interface PlayingCardGameViewController ()
 @end
@@ -62,13 +62,14 @@
     }
 }
 
-- (void)updateCell:(UICollectionViewCell *)cell withMatchedCards:(NSArray *)cards {
+- (void)updateCell:(UICollectionViewCell *)cell
+  withMatchedCards:(NSArray *)cards {
     if ([cards count] == 2) {
-        PlayingCardMatchCollectionViewCell *pcmcvc = (PlayingCardMatchCollectionViewCell *)cell;
+        MatchCollectionViewCell *mcvc = (MatchCollectionViewCell *)cell;
         
-        if (pcmcvc) {
-            PlayingCardView *playingCardView1 = pcmcvc.playingCardViews[0];
-            PlayingCardView *playingCardView2 = pcmcvc.playingCardViews[1];
+        if (mcvc) {
+            PlayingCardView *playingCardView1 = [[PlayingCardView alloc] init];
+            PlayingCardView *playingCardView2 = [[PlayingCardView alloc] init];
             playingCardView1.backgroundColor = [UIColor clearColor];
             playingCardView2.backgroundColor = [UIColor clearColor];
             PlayingCard *playingCard1 = (PlayingCard *)cards[0];
@@ -81,6 +82,10 @@
                 playingCardView2.rank = playingCard2.rank;
                 playingCardView2.suit = playingCard2.suit;
                 playingCardView2.faceUp = YES;
+                
+                [mcvc setCardView:playingCardView1 atPosition:0];
+                [mcvc setCardView:playingCardView2 atPosition:1];
+                mcvc.backgroundColor = [UIColor clearColor];
             }
         }
     }

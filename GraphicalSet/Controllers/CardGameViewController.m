@@ -9,7 +9,8 @@
 #import "CardGameViewController.h"
 #import "CardMatchingGame.h"
 #import "FlipResultView.h"
-#import "MatchSectionHeaderReusableView.h"
+//#import "MatchSectionHeaderReusableView.h"
+#import "MatchCollectionViewCell.h"
 
 @interface CardGameViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
@@ -60,6 +61,7 @@
     return 0;
 }
 
+// Updates the collection view cells for the card cells as well as our matched card cells
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = nil;
@@ -68,13 +70,17 @@
         Card *card = [self.game cardAtIndex:indexPath.item];
         [self updateCell:cell withCard:card];
     } else if (indexPath.section == MATCH_SECTION_INDEX) {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self.identifier stringByAppendingString:@"Match"] forIndexPath:indexPath];
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MatchCell" forIndexPath:indexPath];
         NSArray *matchedCards = [self.game matchAtIndex:indexPath.item];
         [self updateCell:cell withMatchedCards:matchedCards];
     }
     return cell;
 }
 
+// Supplies the header view for the matched card section.
+// Commented out due to bug with supplementary views (i.e. headers) and NSInternalInconsistencyException being thrown when using insertItemsAtIndexPaths:inSection. See http://openradar.appspot.com/12954582
+// To reenable, you will also need to register the reusable view with the collection view (via storyboard, or programmatically in viewDidLoad)
+/*
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath
@@ -88,36 +94,45 @@
     }
 
     return supplementaryView;
-}
+}*/
 
+#pragma UICollectionViewDelegateFlowLayout protocol methods
+
+/*
+// Makes sure that only the matched card section in the collection view has a header
 -(CGSize)collectionView:(UICollectionView *)collectionView
                  layout:(UICollectionViewLayout *)collectionViewLayout
 referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (section == CARD_SECTION_INDEX) return CGSizeMake(0, 0);
-    else {
-        return CGSizeMake(self.view.frame.size.width, 50);
-    }
+    if (section == MATCH_SECTION_INDEX) CGSizeMake(self.view.frame.size.width, 50)
+        return CGSizeMake(0, 0);
 }
-
-#pragma UICollectionViewDelegateFlowLayout protocol methods
-
-#define MATCH_CELL_PADDING 5
-
+*/
+ 
+// Sets the correct collection view cell size for both the card cells and the matched card cells. If not overridden, all cells will be default size.
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGSize cardCellSize = ((UICollectionViewFlowLayout *)collectionViewLayout).itemSize;
-    switch ([indexPath indexAtPosition:0]) {
+    switch (indexPath.section) {
         case CARD_SECTION_INDEX:
             return cardCellSize;
             break;
         case MATCH_SECTION_INDEX:
-            return CGSizeMake(cardCellSize.width * 2, cardCellSize.height);
+            return CGSizeMake(cardCellSize.width * self.numberOfCardsToMatch * .8, cardCellSize.height * .8);
             break;
     }
     return CGSizeMake(0, 0);
+}
+
+// Sets up margin between cards and matched cards
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout*)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section
+{
+    if (section == CARD_SECTION_INDEX) return UIEdgeInsetsMake(0, 0, 10, 0);
+    else return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 #pragma Abstract methods
@@ -218,7 +233,8 @@ referenceSizeForHeaderInSection:(NSInteger)section
     for (int i = 0; i < self.numberOfCardsToAdd; i++) {
         Card *card = [self.game drawCardFromDeck];
         if (card) {
-            [self.cardCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1 inSection:CARD_SECTION_INDEX]]];
+            [self.cardCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1
+                                                                                   inSection:CARD_SECTION_INDEX]]];
         }
     }
     
@@ -227,16 +243,15 @@ referenceSizeForHeaderInSection:(NSInteger)section
         self.addCardsButton.alpha = .3;
     }
     
-    [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1 inSection:CARD_SECTION_INDEX]
+    [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1
+                                                                         inSection:CARD_SECTION_INDEX]
                                     atScrollPosition:UICollectionViewScrollPositionBottom
                                             animated:YES];
 }
 
 - (void)viewDidLoad
 {
-    [self.cardCollectionView registerClass:[MatchSectionHeaderReusableView class]
-                forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                       withReuseIdentifier:@"HeaderView"];
+    [self.cardCollectionView registerClass:[MatchCollectionViewCell class] forCellWithReuseIdentifier:@"MatchCell"];
 }
 
 @end
