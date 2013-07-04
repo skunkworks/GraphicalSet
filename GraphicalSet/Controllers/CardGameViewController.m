@@ -238,6 +238,13 @@ referenceSizeForHeaderInSection:(NSInteger)section
         }
     }
     
+    // Penalize the player if a match exists
+    NSIndexSet *matchIndexSet = [self.game findMatch];
+    if ([matchIndexSet count]) {
+        [self.game addPenalty:self.mismatchPenalty];
+        [self.flipResultView displayResultString:[NSString stringWithFormat:@"Missed a match! -%d point penalty", self.mismatchPenalty]];
+    }
+    
     if (![self.game hasDrawableCards]) {
         self.addCardsButton.enabled = NO;
         self.addCardsButton.alpha = .3;

@@ -93,7 +93,7 @@
                 view3.symbol = card3.symbol;
                 view3.color = card3.color;
                 
-                mcvc.backgroundColor = [UIColor clearColor];
+                mcvc.opaque = NO;
                 [mcvc setCardView:view1 atPosition:0];
                 [mcvc setCardView:view2 atPosition:1];
                 [mcvc setCardView:view3 atPosition:2];

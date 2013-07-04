@@ -197,4 +197,32 @@
     [self.cards removeObjectsAtIndexes:indexes];
 }
 
+- (NSIndexSet *)findMatch {
+    for (int i = 0; i < [self.cards count]; i++) {
+        for (int j = 0; j < [self.cards count]; j++) {
+            // Don't need to check for a match with itself
+            if (j == i) continue;
+            for (int k = 0; k < [self.cards count]; k++) {
+                // Don't need to check for a match with itself
+                if (k == j || k == i) continue;
+                Card *card1 = self.cards[i];
+                Card *card2 = self.cards[j];
+                Card *card3 = self.cards[k];
+                if ([card1 match:@[card2, card3]]) {
+                     NSMutableIndexSet *mutableIndexSet = [[NSMutableIndexSet alloc] init];
+                    [mutableIndexSet addIndex:i];
+                    [mutableIndexSet addIndex:j];
+                    [mutableIndexSet addIndex:k];
+                    return [mutableIndexSet copy];
+                }
+            }
+        }
+    }
+    return [[NSIndexSet alloc] init];
+}
+
+- (void)addPenalty:(NSUInteger)penalty {
+    self.score -= penalty;
+}
+
 @end

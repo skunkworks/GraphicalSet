@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GraphicalSet/Controllers/CardGameViewController.m"
-         timestampString = "394564917.343932"
+         timestampString = "394592925.230688"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "246"
-         endingLineNumber = "246"
+         startingLineNumber = "253"
+         endingLineNumber = "253"
          landmarkName = "-addCards:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -118,6 +118,19 @@
          startingLineNumber = "83"
          endingLineNumber = "83"
          landmarkName = "-updateCell:withMatchedCards:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GraphicalSet/Controllers/CardGameViewController.m"
+         timestampString = "394593058.838164"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "244"
+         endingLineNumber = "244"
+         landmarkName = "-addCards:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

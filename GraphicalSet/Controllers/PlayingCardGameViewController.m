@@ -85,7 +85,7 @@
                 
                 [mcvc setCardView:playingCardView1 atPosition:0];
                 [mcvc setCardView:playingCardView2 atPosition:1];
-                mcvc.backgroundColor = [UIColor clearColor];
+                mcvc.opaque = NO;
             }
         }
     }

@@ -35,6 +35,12 @@
 // Returns NSArray of Card for a valid match index
 - (NSArray *)matchAtIndex:(NSUInteger)index;
 
+// Returns a match if one exists, empty index set if none
+- (NSIndexSet *)findMatch;
+
+// Penalize the player's game score. Penalty is the amount that will be subtracted from the score.
+- (void)addPenalty:(NSUInteger)penalty;
+
 @property (readonly, nonatomic) int score;
 @property (readonly, nonatomic) NSString *result;
 @property (readonly, nonatomic) NSArray *cardsFromResult; // of Card
