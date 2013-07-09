@@ -47,6 +47,7 @@
 
 - (void)updateCell:(UICollectionViewCell *)cell
           withCard:(Card *)card
+          animated:(BOOL)animated
 {
     if ([card isMemberOfClass:[SetCard class]]) {
         SetCard *setCard = (SetCard *)card;

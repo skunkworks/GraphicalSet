@@ -68,7 +68,7 @@
     if (indexPath.section == CARD_SECTION_INDEX) {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.identifier forIndexPath:indexPath];
         Card *card = [self.game cardAtIndex:indexPath.item];
-        [self updateCell:cell withCard:card];
+        [self updateCell:cell withCard:card animated:NO];
     } else if (indexPath.section == MATCH_SECTION_INDEX) {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MatchCell" forIndexPath:indexPath];
         NSArray *matchedCards = [self.game matchAtIndex:indexPath.item];
@@ -137,7 +137,7 @@ referenceSizeForHeaderInSection:(NSInteger)section
 
 #pragma Abstract methods
 
-- (void)updateCell:(UICollectionViewCell *)cell withCard:(Card *)card
+- (void)updateCell:(UICollectionViewCell *)cell withCard:(Card *)card animated:(BOOL)animated
 {
     // abstract method
 }
@@ -169,7 +169,7 @@ referenceSizeForHeaderInSection:(NSInteger)section
         NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
         if (indexPath.section == CARD_SECTION_INDEX) {
             Card *card = [self.game cardAtIndex:indexPath.item];
-            [self updateCell:cell withCard:card];
+            [self updateCell:cell withCard:card animated:NO];
         } else if (indexPath.section == MATCH_SECTION_INDEX) {
             NSArray *matchedCards = [self.game matchAtIndex:indexPath.item];
             [self updateCell:cell withMatchedCards:matchedCards];
@@ -187,6 +187,7 @@ referenceSizeForHeaderInSection:(NSInteger)section
     if (indexPath && indexPath.section == CARD_SECTION_INDEX) {
         // Flip a card
         [self.game flipCardAtIndex:indexPath.item];
+        [self updateCell:[self.cardCollectionView cellForItemAtIndexPath:indexPath] withCard:[self.game cardAtIndex:indexPath.item] animated:YES];
         
         // Display the result in the flip result view (if one exists)
         if (self.game.result) {
@@ -195,7 +196,7 @@ referenceSizeForHeaderInSection:(NSInteger)section
                                         displayRatio:self.cardSubviewDisplayRatio];
         }
         
-        // Remove matched (i.e. unplayable) cards. Must use NSMutableIndexSet and the array of IndexPaths to track cards to remove, since removing cells and cards must be an atomic operation (removing one-by-one would affect array indexing)
+        // Remove matched (i.e. unplayable) cards
         NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
         NSMutableIndexSet *mutableIndexSet = [[NSMutableIndexSet alloc] init];
         for (int i = 0; i < [self.cardCollectionView numberOfItemsInSection:0]; i++) {

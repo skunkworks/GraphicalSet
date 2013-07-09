@@ -64,7 +64,7 @@
                               delay:1
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{ self.alpha = 0; }
-                         completion:nil];
+                         completion:NULL];
     }
     [self setNeedsDisplay];
 }

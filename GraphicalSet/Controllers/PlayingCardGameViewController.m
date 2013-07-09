@@ -46,6 +46,7 @@
 // Implements/overrides the superclass method
 - (void)updateCell:(UICollectionViewCell *)cell
           withCard:(Card *)card
+          animated:(BOOL)animated
 {
     PlayingCard *playingCard = (PlayingCard *)card;
     
@@ -53,11 +54,18 @@
         PlayingCardCollectionViewCell *pccvc = (PlayingCardCollectionViewCell *)cell;
         
         if (pccvc) {
-            PlayingCardView *playingCardView = pccvc.playingCardView;
-            playingCardView.rank = playingCard.rank;
-            playingCardView.suit = playingCard.suit;
-            playingCardView.faceUp = playingCard.isFaceUp;
-            playingCardView.alpha = playingCard.isUnplayable ? .3 : 1;
+            pccvc.playingCardView.rank = playingCard.rank;
+            pccvc.playingCardView.suit = playingCard.suit;
+            if (animated) {
+                [UIView transitionWithView:pccvc.playingCardView
+                                  duration:.5
+                                   options:UIViewAnimationOptionTransitionFlipFromLeft
+                                animations:^{
+                                    pccvc.playingCardView.faceUp = playingCard.isFaceUp;
+                                } completion:NULL];
+            } else {
+                pccvc.playingCardView.faceUp = playingCard.isFaceUp;
+            }
         }
     }
 }

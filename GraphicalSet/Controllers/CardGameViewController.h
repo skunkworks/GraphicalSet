@@ -23,7 +23,8 @@
 
 - (Deck *)createDeck; // abstract
 - (void)updateCell:(UICollectionViewCell *)cell
-          withCard:(Card *)card; // abstract
+          withCard:(Card *)card
+          animated:(BOOL)animated; // abstract
 - (void)updateCell:(UICollectionViewCell *)cell
           withMatchedCards:(NSArray *)cards; // abstract
 - (void)markCardInCell:(UICollectionViewCell *)cell; // abstract
