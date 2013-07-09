@@ -232,8 +232,8 @@ referenceSizeForHeaderInSection:(NSInteger)section
     // Penalize the player if a match exists
     NSIndexSet *indexSet = [self.game findMatch];
     if ([indexSet count]) {
-        [self.game addPenalty:self.mismatchPenalty];
-        [self.flipResultView displayResultString:[NSString stringWithFormat:@"Missed a match! -%d point penalty", self.mismatchPenalty]];
+        [self.game addPenalty:self.mismatchPenalty*2];
+        [self.flipResultView displayResultString:[NSString stringWithFormat:@"Missed a match! -%d point penalty", self.mismatchPenalty*2]];
     }
     
     // Add cards from deck, if available
