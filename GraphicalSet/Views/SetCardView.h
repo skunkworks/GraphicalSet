@@ -16,4 +16,7 @@
 @property (nonatomic) NSUInteger color;
 @property (nonatomic, getter = isFaceUp) BOOL faceUp;
 
+// Marks the card
+- (void)mark;
+
 @end

@@ -33,41 +33,76 @@
 
 - (void)displayResultString:(NSString *)result
 {
-    self.result = result;
-    self.cardSubviews = nil;
-    [self setNeedsDisplay];
+    [self displayResultString:result
+             withCardSubviews:nil
+                 displayRatio:0
+                     animated:YES];
 }
 
 - (void)displayResultString:(NSString *)result
            withCardSubviews:(NSArray *)cardSubviews
                displayRatio:(CGFloat)displayRatio
 {
+    [self displayResultString:result
+             withCardSubviews:cardSubviews
+                 displayRatio:displayRatio
+                     animated:YES];
+}
+
+- (void)displayResultString:(NSString *)result
+           withCardSubviews:(NSArray *)cardSubviews
+               displayRatio:(CGFloat)displayRatio
+                   animated:(BOOL)animated
+{
     self.result = result;
     self.cardSubviews = cardSubviews;
     self.cardSubviewDisplayRatio = displayRatio;
+    self.alpha = 1;
+    
+    if (animated) {
+        [UIView animateWithDuration:3
+                              delay:1
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{ self.alpha = 0; }
+                         completion:nil];
+    }
     [self setNeedsDisplay];
 }
 
 
 #define FONT_SCALE_FACTOR 0.55
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
+    // Clear out subviews from old results
     [self.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     
+    // The result string font is scaled by the size of the view
     UIFont *font = [UIFont systemFontOfSize:self.bounds.size.height * FONT_SCALE_FACTOR];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.alignment = NSTextAlignmentLeft;
 
+    // Tokenize the result string...
     NSArray *resultStringArray = [FlipResultView parseResultString:self.result];
-    int xCoordinate = 0;
+    
+    // but before we can render the tokens as card views and attributed strings, we calculate the total
+    // required width so that we can center the results within the view
+    CGFloat widthNeeded = 0;
+    for (id object in resultStringArray) {
+        if ([object isKindOfClass:[NSString class]]) {
+            NSString *string = (NSString *)object;
+            NSAttributedString *resultText = [[NSAttributedString alloc] initWithString:string attributes:@{NSFontAttributeName : font }];
+            widthNeeded += [resultText size].width;
+        } else if ([object isMemberOfClass:[NSNull class]]) {
+            widthNeeded += self.bounds.size.height*self.cardSubviewDisplayRatio;
+        }
+    }
+
+    // Then we render the results
+    int xCoordinate = (self.bounds.size.width - widthNeeded) / 2;
     int subviewIndex = 0;
     for (id object in resultStringArray) {
         if ([object isKindOfClass:[NSString class]]) {
             NSString *string = (NSString *)object;
-            NSAttributedString *resultText = [[NSAttributedString alloc] initWithString:string attributes:@{ NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : font }];
+            NSAttributedString *resultText = [[NSAttributedString alloc] initWithString:string attributes:@{NSFontAttributeName : font }];
             CGRect textBounds;
             textBounds.origin = CGPointMake(xCoordinate, (self.bounds.size.height - [resultText size].height)/2);
             textBounds.size = [resultText size];
@@ -84,12 +119,12 @@
                 [self addSubview:subview];
                 xCoordinate += viewBounds.size.width;
                 subviewIndex++;
-
             }
         }
-    }    
+    }
 }
 
+// Takes the result string and turns it into an array of tokens. NSNull items are placeholders for the cards
 + (NSArray *)parseResultString:(NSString *)string
 {
     if (!string) return nil;

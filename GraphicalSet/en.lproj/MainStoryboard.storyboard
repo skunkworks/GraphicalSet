@@ -116,7 +116,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addCards:" destination="xZ7-Dr-hvI" eventType="touchUpInside" id="NZV-XZ-51e"/>
+                                    <action selector="addCards:" destination="xZ7-Dr-hvI" eventType="touchUpInside" id="rLE-Jb-sbu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySz-Gq-UW3">
@@ -132,7 +132,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="deal" destination="8B6-Zb-OfT" eventType="touchUpInside" id="6mN-Pb-EBT"/>
+                                    <action selector="deal" destination="xZ7-Dr-hvI" eventType="touchUpInside" id="1nq-uQ-dZX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IHN-RP-bNV">
@@ -147,6 +147,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="findMatch" destination="xZ7-Dr-hvI" eventType="touchUpInside" id="uW3-CO-cA8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -175,6 +178,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Set" image="square.png" id="5j1-fg-dfn"/>
                     <connections>
+                        <outlet property="addCardsButton" destination="iIZ-U0-pwi" id="XTX-4y-Rbu"/>
                         <outlet property="cardCollectionView" destination="32J-Ut-RAb" id="hMG-aQ-aIN"/>
                         <outlet property="flipResultView" destination="QnE-yr-OIV" id="Puq-Fj-KvH"/>
                         <outlet property="scoreLabel" destination="BVW-DH-edE" id="Hav-KK-6zz"/>
@@ -287,7 +291,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="deal" destination="8B6-Zb-OfT" eventType="touchUpInside" id="fgo-uN-4Ws"/>
+                                    <action selector="deal" destination="8B6-Zb-OfT" eventType="touchUpInside" id="1cQ-qH-Zw7"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h58-yL-jhJ" customClass="FlipResultView">
@@ -400,6 +404,8 @@
         <class className="CardGameViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CardGameViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addCards:"/>
+                <relationship kind="action" name="flipCard:" candidateClass="UITapGestureRecognizer"/>
                 <relationship kind="outlet" name="addCardsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="cardCollectionView" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="flipResultView" candidateClass="FlipResultView"/>
@@ -412,6 +418,8 @@
         <class className="GameSettingsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSettingsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="changePlayingCardStartCount:" candidateClass="UISlider"/>
+                <relationship kind="action" name="editedPlayingCardStartCount:" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="playingCardStartCountLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="playingCardStartCountSlider" candidateClass="UISlider"/>
             </relationships>
@@ -451,6 +459,9 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -163,7 +163,9 @@
                     [mutableString appendString:[NSString stringWithFormat:@"[%@]", card.contents]];
                     firstRun = false;
                 }
-                else          [mutableString appendString:[NSString stringWithFormat:@"&[%@]", card.contents]];
+                else {
+                    [mutableString appendString:[NSString stringWithFormat:@"&[%@]", card.contents]];
+                }
             }
         }
     }

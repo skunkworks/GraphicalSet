@@ -9,5 +9,4 @@
 #import "SetCardCollectionViewCell.h"
 
 @implementation SetCardCollectionViewCell
-
 @end

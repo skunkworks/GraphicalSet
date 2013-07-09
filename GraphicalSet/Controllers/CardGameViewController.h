@@ -26,5 +26,6 @@
           withCard:(Card *)card; // abstract
 - (void)updateCell:(UICollectionViewCell *)cell
           withMatchedCards:(NSArray *)cards; // abstract
+- (void)markCardInCell:(UICollectionViewCell *)cell; // abstract
 + (NSArray *)createCardSubviews:(NSArray *)cards; // abstract, accepts array of Card, returns array of UIView
 @end

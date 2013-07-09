@@ -8,6 +8,10 @@
 
 #import "SetCardView.h"
 
+@interface SetCardView ()
+@property (nonatomic) BOOL shouldBeMarked;
+@end
+
 @implementation SetCardView
 
 - (void)setColor:(NSUInteger)color {
@@ -35,18 +39,32 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
 
-#define SELECTED_MARK_SCALE .3
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+// Highlight the set card view
+- (void)mark
+{
+    self.shouldBeMarked = YES;
+}
+
+#define SELECTED_CHECKMARK_SCALE .3
+
 - (void)drawRect:(CGRect)rect
 {
     [[UIColor whiteColor] setFill];
     UIRectFill(self.bounds);
+    
+    if (self.shouldBeMarked) {
+        [[UIColor blueColor] setStroke];
+        UIBezierPath *borderBezierPath = [UIBezierPath bezierPathWithRect:self.bounds];
+        borderBezierPath.lineWidth = 3;
+        [borderBezierPath stroke];
+        
+        // We want the marking to be removed on next redraw (i.e. on next player move)
+        self.shouldBeMarked = NO;
+    }
     
     UIColor *strokeColor = [self colorForCard];
     
@@ -71,11 +89,11 @@
     }
     
     if (self.isFaceUp) {
-        CGSize selectedMarkSize = CGSizeMake(rect.size.width * SELECTED_MARK_SCALE, rect.size.width * SELECTED_MARK_SCALE);
-        CGRect selectedMarkRect = CGRectMake(rect.size.width + rect.origin.x - selectedMarkSize.width, 0,
-                                             selectedMarkSize.width, selectedMarkSize.height);
-        NSAttributedString *checkMark = [[NSAttributedString alloc] initWithString:@"✓" attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:selectedMarkSize.width]}];
-        [checkMark drawInRect:selectedMarkRect];
+        CGSize checkmarkSize = CGSizeMake(rect.size.width * SELECTED_CHECKMARK_SCALE, rect.size.width * SELECTED_CHECKMARK_SCALE);
+        CGRect checkmarkRect = CGRectMake(rect.size.width + rect.origin.x - checkmarkSize.width, 0,
+                                             checkmarkSize.width, checkmarkSize.height);
+        NSAttributedString *checkmarkAttributedString = [[NSAttributedString alloc] initWithString:@"✓" attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:checkmarkSize.width]}];
+        [checkmarkAttributedString drawInRect:checkmarkRect];
     }
 }
 

@@ -65,40 +65,46 @@
 }
 
 - (void)updateCell:(UICollectionViewCell *)cell withMatchedCards:(NSArray *)cards {
-    if ([cards count] == 3) {
+    if ([cards count] == 3 && [cell isMemberOfClass:[MatchCollectionViewCell class]]) {
         MatchCollectionViewCell *mcvc = (MatchCollectionViewCell *)cell;
         
-        if (mcvc) {
-            SetCardView *view1 = [[SetCardView alloc] init];
-            SetCardView *view2 = [[SetCardView alloc] init];
-            SetCardView *view3 = [[SetCardView alloc] init];
-            view1.backgroundColor = [UIColor whiteColor];
-            view2.backgroundColor = [UIColor whiteColor];
-            view3.backgroundColor = [UIColor whiteColor];
-            SetCard *card1 = (SetCard *)cards[0];
-            SetCard *card2 = (SetCard *)cards[1];
-            SetCard *card3 = (SetCard *)cards[2];
+        SetCardView *view1 = [[SetCardView alloc] init];
+        SetCardView *view2 = [[SetCardView alloc] init];
+        SetCardView *view3 = [[SetCardView alloc] init];
+        view1.backgroundColor = [UIColor whiteColor];
+        view2.backgroundColor = [UIColor whiteColor];
+        view3.backgroundColor = [UIColor whiteColor];
+        SetCard *card1 = (SetCard *)cards[0];
+        SetCard *card2 = (SetCard *)cards[1];
+        SetCard *card3 = (SetCard *)cards[2];
+        
+        if (card1 && card2 && card3) {
+            view1.number = card1.number;
+            view1.shade = card1.shade;
+            view1.symbol = card1.symbol;
+            view1.color = card1.color;
+            view2.number = card2.number;
+            view2.shade = card2.shade;
+            view2.symbol = card2.symbol;
+            view2.color = card2.color;
+            view3.number = card3.number;
+            view3.shade = card3.shade;
+            view3.symbol = card3.symbol;
+            view3.color = card3.color;
             
-            if (card1 && card2 && card3) {
-                view1.number = card1.number;
-                view1.shade = card1.shade;
-                view1.symbol = card1.symbol;
-                view1.color = card1.color;
-                view2.number = card2.number;
-                view2.shade = card2.shade;
-                view2.symbol = card2.symbol;
-                view2.color = card2.color;
-                view3.number = card3.number;
-                view3.shade = card3.shade;
-                view3.symbol = card3.symbol;
-                view3.color = card3.color;
-                
-                mcvc.opaque = NO;
-                [mcvc setCardView:view1 atPosition:0];
-                [mcvc setCardView:view2 atPosition:1];
-                [mcvc setCardView:view3 atPosition:2];
-            }
+            mcvc.opaque = NO;
+            [mcvc setCardView:view1 atPosition:0];
+            [mcvc setCardView:view2 atPosition:1];
+            [mcvc setCardView:view3 atPosition:2];
         }
+    }
+}
+
+- (void)markCardInCell:(UICollectionViewCell *)cell
+{
+    if ([cell isMemberOfClass:[SetCardCollectionViewCell class]]) {
+        SetCardCollectionViewCell *sccvc = (SetCardCollectionViewCell *)cell;
+        [sccvc.setCardView mark];
     }
 }
 

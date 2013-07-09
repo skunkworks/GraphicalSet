@@ -159,6 +159,10 @@ referenceSizeForHeaderInSection:(NSInteger)section
     return nil;
 }
 
+- (void)markCardInCell:(UICollectionViewCell *)cell {
+    // abstract
+}
+
 - (void)updateUI
 {
     for (UICollectionViewCell *cell in [self.cardCollectionView visibleCells]) {
@@ -189,11 +193,6 @@ referenceSizeForHeaderInSection:(NSInteger)section
             [self.flipResultView displayResultString:self.game.result
                                     withCardSubviews:[[self class] createCardSubviews:[self.game cardsFromResult]]
                                         displayRatio:self.cardSubviewDisplayRatio];
-            self.flipResultView.alpha = 1;
-            [UIView beginAnimations:nil context:NULL];
-            [UIView setAnimationDuration:5];
-            self.flipResultView.alpha = 0;
-            [UIView commitAnimations];
         }
         
         // Remove matched (i.e. unplayable) cards. Must use NSMutableIndexSet and the array of IndexPaths to track cards to remove, since removing cells and cards must be an atomic operation (removing one-by-one would affect array indexing)
@@ -209,7 +208,7 @@ referenceSizeForHeaderInSection:(NSInteger)section
             // Update matched section of our collection view
             [self.cardCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.game matchesCount]-1 inSection:MATCH_SECTION_INDEX]]];
             // Finally, remove the cards from the game and from the collection view. This has to be done after we insert the matched cards into the match section of the collection view, otherwise there's a discrepancy between what the data source returns for the card count vs. the cell count in the collection view.
-            [self.game removeCardsAtIndexes:[mutableIndexSet copy]];
+            [self.game removeCardsAtIndexes:mutableIndexSet];
             [self.cardCollectionView deleteItemsAtIndexPaths:[mutableArray copy]];
         }
 
@@ -230,30 +229,65 @@ referenceSizeForHeaderInSection:(NSInteger)section
 
 - (IBAction)addCards:(id)sender
 {
-    for (int i = 0; i < self.numberOfCardsToAdd; i++) {
-        Card *card = [self.game drawCardFromDeck];
-        if (card) {
-            [self.cardCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1
-                                                                                   inSection:CARD_SECTION_INDEX]]];
-        }
-    }
-    
     // Penalize the player if a match exists
-    NSIndexSet *matchIndexSet = [self.game findMatch];
-    if ([matchIndexSet count]) {
+    NSIndexSet *indexSet = [self.game findMatch];
+    if ([indexSet count]) {
         [self.game addPenalty:self.mismatchPenalty];
         [self.flipResultView displayResultString:[NSString stringWithFormat:@"Missed a match! -%d point penalty", self.mismatchPenalty]];
     }
     
-    if (![self.game hasDrawableCards]) {
+    // Add cards from deck, if available
+    if ([self.game hasDrawableCards]) {
+    for (int i = 0; i < self.numberOfCardsToAdd; i++) {
+            Card *card = [self.game drawCardFromDeck];
+            if (card) {
+                [self.cardCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1
+                                                                                       inSection:CARD_SECTION_INDEX]]];
+            }
+        }
+
+        [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1
+                                                                             inSection:CARD_SECTION_INDEX]
+                                        atScrollPosition:UICollectionViewScrollPositionBottom
+                                                animated:YES];
+    } else {
+        // No more available cards in deck, so disable button
         self.addCardsButton.enabled = NO;
         self.addCardsButton.alpha = .3;
+
+        // Check if game has ended (no more matches)
+        indexSet = [self.game findMatch];
+        if (![indexSet count]) {
+            [self.flipResultView displayResultString:@"Game over, man!"];
+        }
     }
+}
+
+- (IBAction)findMatch {
+    // Query the game for a match
+    NSIndexSet *indexSet = [self.game findMatch];
     
-    [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.game cardsInPlayCount]-1
-                                                                         inSection:CARD_SECTION_INDEX]
-                                    atScrollPosition:UICollectionViewScrollPositionBottom
-                                            animated:YES];
+    if ([indexSet count]) {
+        NSUInteger index = [indexSet firstIndex];
+        
+        // Mark the match cells
+        while (index != NSNotFound)
+        {
+            UICollectionViewCell *cell = nil;
+            cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:CARD_SECTION_INDEX]];
+            
+            // Add visual decoration to the cell to give a visual hint that it is part of a match
+            [self markCardInCell:cell];
+            index = [indexSet indexGreaterThanIndex: index];
+        }
+        
+        // And penalize the player for the hint
+        [self.game addPenalty:self.mismatchPenalty * 2];
+        [self.flipResultView displayResultString:[NSString stringWithFormat:@"Here's a hint!"]];
+        [self updateUI];
+    } else {
+        [self.flipResultView displayResultString:@"No match found"];
+    }
 }
 
 - (void)viewDidLoad
